@@ -135,15 +135,13 @@ print(f'O Delta de 23,94 para roubo de transeuntes indica que a média está bem
 
 # 3.identificação de Anomalias(Outliers)
 
-try:
-    dp_roubo_celular = df_roubo[df_roubo['roubo_celular'] > limite_superior_celular]
-    dp_roubo_transeunte = df_roubo[df_roubo['roubo_transeunte'] > limite_superior_transeunte]
+dp_roubo_celular = df_roubo[df_roubo['roubo_celular'] > limite_superior_celular]
 
-    print(dp_roubo_celular)
-    print(dp_roubo_transeunte)
+outliers_por_dp = (dp_roubo_celular .groupby('nome').size().reset_index(name='qtd_outliers').sort_values(by='qtd_outliers', ascending=False))
 
-except Exception as e: 
-    print(f'Erro ao identificar anomalias: {e}')
+
+print(outliers_por_dp)
+
 
 # 4.Visualização de Dados
 try:
